@@ -1,4 +1,4 @@
-**Aihe:** toteutus perinteisestä laivanupotus-pelistä. 
-Kaksinpelattava, kaikki originaalit toiminnot on tarkoitus toteuttaa. Kaksijakoinen näkymä, missä toisessa oman laivueen tilanne, ja toisessa näkymä jo ammutuista sijainneista, ilmoitus osumista. 
+**Aihe:** Toteutus perinteisestä laivanupotus-pelistä. 
+Kaksinpelattava (yksinkertainen AI jos aikaa?). Kaikki originaalit toiminnot on tarkoitus toteuttaa. Kaksijakoinen näkymä, missä toisessa oman laivueen tilanne, ja toisessa näkymä jo ammutuista sijainneista ja osumista. 
 **Käyttäjät:** Pelaaja  
-**Toiminnot:** laivueen asettaminen pelilaudalle, ohjuksen laukaisu tiettyyn koordinaattiin
+**Toiminnot:** Laivueen asettaminen pelilaudalle, ohjuksen laukaisu tiettyyn koordinaattiin
