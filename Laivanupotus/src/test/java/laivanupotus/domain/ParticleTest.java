@@ -32,7 +32,12 @@ public class ParticleTest {
     }
     
     @Test
-    public void damage() {
+    public void notDamaged() {
+        assertFalse(p.isDamaged());
+    }
+    
+    @Test
+    public void damaging() {
         p.getShot();
         assertTrue(p.isDamaged());
     }

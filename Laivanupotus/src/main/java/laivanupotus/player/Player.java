@@ -19,11 +19,11 @@ public class Player {
     }
     
     public boolean addShip(Ship ship) {
-        while (ships.size() < 6) {
+        while (ships.size() < 5) {
             for(Particle p : ship.getPieces()) {
                 for (Ship s : getShips()) {
                     for (Particle pa : s.getPieces()) {
-                        if (p.getX() == pa.getX() && p.getY() == p.getY()) {
+                        if (p.getX() == pa.getX() && p.getY() == pa.getY()) {
                             return false;
                         }
                     }

@@ -38,7 +38,7 @@ public class AiTest {
     }
     
     @Test
-    public void shipLenghtFive() {
+    public void shipLengthFive() {
         Ship s = new Ship(0, 0, 0, 1);
         for (Ship sh : ai.getPlayer().getShips()) {
             if (sh.getLength() == 5) {
@@ -48,7 +48,7 @@ public class AiTest {
         assertEquals(5, s.getLength());
     }
     @Test
-    public void shipLenghtFour() {
+    public void shipLengthFour() {
         Ship s = new Ship(0, 0, 0, 1);
         for (Ship sh : ai.getPlayer().getShips()) {
             if (sh.getLength() == 4) {
@@ -58,7 +58,7 @@ public class AiTest {
         assertEquals(4, s.getLength());
     }
     @Test
-    public void twoShipsLenghtThree() {
+    public void twoShipsLengthThree() {
         Ship s = new Ship(0, 0, 0, 1);
         int amount = 0;
         for (Ship sh : ai.getPlayer().getShips()) {
@@ -71,7 +71,7 @@ public class AiTest {
         assertEquals(3, s.getLength());
     }
     @Test
-    public void shipLenghtTwo() {
+    public void shipLengthTwo() {
         Ship s = new Ship(0, 0, 0, 1);
         for (Ship sh : ai.getPlayer().getShips()) {
             if (sh.getLength() == 2) {
