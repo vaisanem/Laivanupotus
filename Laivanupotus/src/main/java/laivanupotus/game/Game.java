@@ -6,13 +6,13 @@ public class Game {
     
     private boolean end;
     private boolean turn;
-    private User user;
+    private Player player;
     private Ai ai;
 
     public Game() {
         end = false;
         turn = true;
-        user = new User();
+        player = new Player();
         ai = new Ai();
     }
 
@@ -20,8 +20,8 @@ public class Game {
         return ai;
     }
 
-    public User getUser() {
-        return user;
+    public Player getPlayer() {
+        return player;
     }
     
     

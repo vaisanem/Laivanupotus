@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import laivanupotus.domain.*;
 
-public abstract class Player {
+public class Player {
     
     private List<Ship> ships;
     private List<Shot> shotsFired;
@@ -14,12 +14,25 @@ public abstract class Player {
         this.shotsFired = new ArrayList<>();
     }
     
-    public abstract void shoot(int x, int y);
+    public void shoot(int x, int y) {
+        
+    }
     
-    public void addShip(Ship ship) {
+    public boolean addShip(Ship ship) {
         while (ships.size() < 6) {
+            for(Particle p : ship.getPieces()) {
+                for (Ship s : getShips()) {
+                    for (Particle pa : s.getPieces()) {
+                        if (p.getX() == pa.getX() && p.getY() == p.getY()) {
+                            return false;
+                        }
+                    }
+                }
+            }
             ships.add(ship);
+            return true;
         }
+        return false;
     }
     
     public void addShot(Shot shot) {
