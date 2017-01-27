@@ -3,5 +3,7 @@ Kaksinpelattava, (yksinkertainen AI?). Kaikki originaalit toiminnot on tarkoitus
   
 **Käyttäjät:** Pelaaja  
   
-**Toiminnot:** Laivueen asettaminen pelilaudalle, ohjuksen laukaisu tiettyyn koordinaattiin
+**Toiminnot:** Laivueen asettaminen pelilaudalle, ohjuksen laukaisu tiettyyn koordinaattiin  
+  
+  
 ![Alt text](/dokumentaatio/Laivanupotusluokkakaavio.png)
