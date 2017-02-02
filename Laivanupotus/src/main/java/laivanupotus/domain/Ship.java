@@ -14,7 +14,6 @@ public class Ship {
 
     public Ship(int length, int x, int y, int direction) {
         this.length = length;
-        this.afloat = true;
         this.x = x;
         this.y = y;
         this.direction = direction;

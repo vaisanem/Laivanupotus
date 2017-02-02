@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class AiTest {
     
-    Ai ai;
+    Ai ay;
     
     public AiTest() {
     }
@@ -25,7 +25,7 @@ public class AiTest {
     
     @Before
     public void setUp() {
-        ai = new Ai();
+        ay = new Ai();
     }
     
     @After
@@ -34,13 +34,13 @@ public class AiTest {
     
     @Test
     public void shipCount() {
-        assertEquals(5, ai.getPlayer().getShips().size());
+        assertEquals(5, ay.getPlayer().getShips().size());
     }
     
     @Test
     public void shipLengthFive() {
         Ship s = new Ship(0, 0, 0, 1);
-        for (Ship sh : ai.getPlayer().getShips()) {
+        for (Ship sh : ay.getPlayer().getShips()) {
             if (sh.getLength() == 5) {
                 s = sh;
             }
@@ -50,7 +50,7 @@ public class AiTest {
     @Test
     public void shipLengthFour() {
         Ship s = new Ship(0, 0, 0, 1);
-        for (Ship sh : ai.getPlayer().getShips()) {
+        for (Ship sh : ay.getPlayer().getShips()) {
             if (sh.getLength() == 4) {
                 s = sh;
             }
@@ -61,7 +61,7 @@ public class AiTest {
     public void twoShipsLengthThree() {
         Ship s = new Ship(0, 0, 0, 1);
         int amount = 0;
-        for (Ship sh : ai.getPlayer().getShips()) {
+        for (Ship sh : ay.getPlayer().getShips()) {
             if (sh.getLength() == 3) {
                 s = sh;
                 amount++;
@@ -73,7 +73,7 @@ public class AiTest {
     @Test
     public void shipLengthTwo() {
         Ship s = new Ship(0, 0, 0, 1);
-        for (Ship sh : ai.getPlayer().getShips()) {
+        for (Ship sh : ay.getPlayer().getShips()) {
             if (sh.getLength() == 2) {
                 s = sh;
             }

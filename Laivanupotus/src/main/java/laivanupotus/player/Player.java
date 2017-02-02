@@ -20,7 +20,7 @@ public class Player {
     
     public boolean addShip(Ship ship) {
         while (ships.size() < 5) {
-            for(Particle p : ship.getPieces()) {
+            for (Particle p : ship.getPieces()) {
                 for (Ship s : getShips()) {
                     for (Particle pa : s.getPieces()) {
                         if (p.getX() == pa.getX() && p.getY() == pa.getY()) {
@@ -37,6 +37,18 @@ public class Player {
     
     public void addShot(Shot shot) {
         shotsFired.add(shot);
+    }
+    
+    public boolean hasLost() {
+        if (ships.size() == 5) {
+            for (Ship s : ships) {
+                if (s.isAfloat()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public List<Ship> getShips() {

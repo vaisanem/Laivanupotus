@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import laivanupotus.game.Game;
 
-public class Display implements Runnable{
+public class Display implements Runnable {
     
     private JFrame frame;
     private Game game;

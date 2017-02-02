@@ -30,6 +30,7 @@ public class ControlPanel implements Runnable {
     }
     
     public void createComponents(Container container) {
+        //container.setLayout();
         JTextField text = new JTextField();
         container.add(text);
     }
