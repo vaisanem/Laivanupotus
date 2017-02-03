@@ -15,7 +15,8 @@ public class Player {
     }
     
     public void shoot(int x, int y) {
-        
+        Shot shot = new Shot(x, y);
+        shotsFired.add(shot);
     }
     
     public boolean addShip(Ship ship) {
@@ -33,10 +34,6 @@ public class Player {
             return true;
         }
         return false;
-    }
-    
-    public void addShot(Shot shot) {
-        shotsFired.add(shot);
     }
     
     public boolean hasLost() {

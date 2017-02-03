@@ -7,20 +7,13 @@ public class Ship {
     
     private List<Particle> pieces;
     private int length;
-    private boolean afloat;
-    private int x;
-    private int y;
-    private int direction;
 
     public Ship(int length, int x, int y, int direction) {
         this.length = length;
-        this.x = x;
-        this.y = y;
-        this.direction = direction;
         pieces = new ArrayList<>();
         Particle p = new Particle(x, y);
         pieces.add(p);
-        addOtherParticles();
+        addOtherParticles(x, y, direction);
         
     }
     
@@ -33,9 +26,9 @@ public class Ship {
         return false;
     }
     
-    private void addOtherParticles() {
+    private void addOtherParticles(int x, int y, int direction) {
 
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length - 1; i++) {
             if (direction == 1) {
                 Particle pa = new Particle(x, y + i);
                 pieces.add(pa);

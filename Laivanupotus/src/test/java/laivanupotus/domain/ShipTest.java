@@ -32,6 +32,11 @@ public class ShipTest {
     }
     
     @Test
+    public void asManyPartcilesAsLength() {
+        assertEquals(ship.getLength(), ship.getPieces().size());
+    }
+    
+    @Test
     public void isAfloat() {
         assertTrue(ship.isAfloat());
     }

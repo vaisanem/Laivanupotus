@@ -54,6 +54,21 @@ public class PlayerTest {
     }
     
     @Test
+    public void shipGetsAdded() {
+        Ship s = new Ship(4, 1, 1, 3);
+        assertTrue(playa.addShip(s));
+        assertEquals(1, playa.getShips().size());
+        assertEquals(s, playa.getShips().get(0));
+    }
+    
+    @Test
+    public void shotGetsAdded() {
+        Shot shot = new Shot(0, 0);
+        playa.shoot(0, 0);
+        assertEquals(1, playa.getShotsFired().size());
+    }
+    
+    @Test
     public void wontAddShipWithSameParticle() {
         Ship s = new Ship(4, 1, 1, 3);
         playa.addShip(s);
