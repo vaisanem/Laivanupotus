@@ -9,3 +9,5 @@ Päivä | Tunnit | Kuvaus
 02.02.2017 | 1h | Luokkien ohjelmointi
 02.02.2017 | 1,5h | UI herätetty eloon
 03.02.2017 | 2,5h | Testejä ja raportteja
+05.02.2017 | 1h | Koodikatselmointi
+06.02.2017 | 2,5h | Kokoon parsimista, UI
