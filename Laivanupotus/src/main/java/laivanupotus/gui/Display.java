@@ -1,28 +1,24 @@
 package laivanupotus.gui;
 
-import java.awt.Container;
-import java.awt.Dimension;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+import java.awt.*;
+import javax.swing.*;
 import laivanupotus.game.Game;
 
 public class Display implements Runnable {
     
     private JFrame frame;
     private Game game;
-    private Board board;
 
     public Display(Game game) {
         this.game = game;
     }
-    
-    
 
     @Override
     public void run() {
         frame = new JFrame("Battleship");
-
-        frame.setPreferredSize(new Dimension(850, 500));
+        int leveys = (2 * 15 + 2) * 30 + 10 + (400);
+        int korkeus = (15 + 1) * 30 + 10;
+        frame.setPreferredSize(new Dimension(leveys, korkeus));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -33,7 +29,22 @@ public class Display implements Runnable {
     }
     
     public void createComponents(Container container) {
-        this.board = new Board(game);
-        container.add(board);
+        container.setLayout(new GridLayout(1, 3));
+        container.add(game.getBoardAi());
+        container.add(luoPaneeli());
+        container.add(game.getBoardPlayer());
     }
+    
+    public JPanel luoPaneeli() {
+        JPanel paneeli = new JPanel();
+        paneeli.setLayout(new GridLayout(2, 1));
+        JTextField text = new JTextField();
+        JButton butt = new JButton("Enter");
+        JLabel message = new JLabel();
+        butt.addActionListener(new ShipListener(game, butt, text, message));
+        paneeli.add(text);
+        paneeli.add(butt);
+        return paneeli;
+    }
+    
 }

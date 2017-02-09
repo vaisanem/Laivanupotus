@@ -55,7 +55,7 @@ public class PlayerTest {
     
     @Test
     public void shipGetsAdded() {
-        Ship s = new Ship(4, 1, 1, 3);
+        Ship s = new Ship(4, 1, 1, 1);
         assertTrue(playa.addShip(s));
         assertEquals(1, playa.getShips().size());
         assertEquals(s, playa.getShips().get(0));
@@ -64,7 +64,7 @@ public class PlayerTest {
     @Test
     public void shotGetsAdded() {
         Shot shot = new Shot(0, 0);
-        playa.shoot(0, 0);
+        playa.shoot(shot);
         assertEquals(1, playa.getShotsFired().size());
     }
     
@@ -83,17 +83,19 @@ public class PlayerTest {
         assertEquals(5, playa.getShips().size());
     }
     
+    @Test
     public void addShips() {
         Ship s = new Ship(5, 0, 0, 2);
         Ship sa = new Ship(4, 15, 15, 4);
         Ship ss = new Ship(3, 10, 10, 3);
         Ship se = new Ship(3, 4, 5, 3);
-        Ship sg = new Ship(2, 0, 10, 4);
+        Ship sg = new Ship(2, 0, 10, 2);
         playa.addShip(s);
         playa.addShip(sa);
         playa.addShip(ss);
         playa.addShip(se);
         playa.addShip(sg);
+        assertEquals(5, playa.getShips().size());
     }
 
     // TODO add test methods here.
