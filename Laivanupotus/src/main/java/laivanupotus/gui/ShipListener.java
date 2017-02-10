@@ -6,6 +6,10 @@ import javax.swing.*;
 import laivanupotus.domain.Ship;
 import laivanupotus.game.*;
 
+/**
+ * Class takes care of adding the players ships.
+ */
+
 public class ShipListener implements ActionListener {
     
     private Game game;

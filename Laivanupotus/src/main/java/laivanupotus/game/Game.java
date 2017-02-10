@@ -5,6 +5,11 @@ import laivanupotus.domain.*;
 import laivanupotus.gui.*;
 import laivanupotus.player.*;
 
+/**
+ * Class has the components needed 
+ * and a loop responsible of executing game actions.
+ */
+
 public class Game {
     
     private boolean end;
@@ -55,26 +60,13 @@ public class Game {
         
         while (!end) {
             
+            boolean winner;
+            
             if (turn % 2 == 0) {
-                int shots = player.getShotsFired().size();
-                while (true) {
-                    if (shots + 1 == player.getShotsFired().size()) {
-                        break;
-                    }
-                }
+                playerShoots();
                 boardAi.update();
             } else {
-                ai.shoot();
-                //RETURN SHOT?
-                Shot sh = ai.getPlayer().getShotsFired().get(ai.getPlayer().getShotsFired().size() - 1);
-                for (Ship s : player.getShips()) {
-                    for (Particle p : s.getPieces()) {
-                        if (p.getX() == sh.getX() && p.getY() == sh.getY()) {
-                            p.getShot();
-                            sh.setHit(true);
-                        }
-                    }
-                }
+                aiShoots();
                 boardPlayer.update();
                 try {
                     Thread.sleep(3000);
@@ -82,12 +74,50 @@ public class Game {
                     System.out.println("Errror rror or rrr");
                 }
             }
+            
+            if (player.hasLost()) {
+                winner = false;
+                end = true;
+            } else if (ai.getPlayer().hasLost()) {
+                winner = true;
+                end = true;
+            }
 
             turn++;
 
         }
         
         
+    }
+    
+    private void playerShoots() {
+        int shots = player.getShotsFired().size();
+        while (true) {
+            if (shots + 1 == player.getShotsFired().size()) {
+                break;
+            }
+        }
+        Player aiPlayer = ai.getPlayer();
+        didItHit(player, aiPlayer);
+    }
+    
+    private void aiShoots() {
+        ai.shoot();
+        //RETURN SHOT?
+        Player aiPlayer = ai.getPlayer();
+        didItHit(aiPlayer, player);
+    }
+    
+    private void didItHit(Player shooter, Player target) {
+        Shot sh = shooter.getShotsFired().get(shooter.getShotsFired().size() - 1);
+        for (Ship s : target.getShips()) {
+            for (Particle p : s.getPieces()) {
+                if (p.getX() == sh.getX() && p.getY() == sh.getY()) {
+                    p.getShot();
+                    sh.setHit(true);
+                }
+            }
+        }
     }
 
     public Ai getAi() {

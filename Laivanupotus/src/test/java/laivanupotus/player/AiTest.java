@@ -38,24 +38,30 @@ public class AiTest {
     }
     
     @Test
-    public void shipLengthFive() {
+    public void oneShipLengthFive() {
         Ship s = new Ship(0, 0, 0, 1);
+        int amount = 0;
         for (Ship sh : ay.getPlayer().getShips()) {
             if (sh.getLength() == 5) {
                 s = sh;
+                amount++;
             }
         }
         assertEquals(5, s.getLength());
+        assertEquals(1, amount);
     }
     @Test
-    public void shipLengthFour() {
+    public void oneShipLengthFour() {
         Ship s = new Ship(0, 0, 0, 1);
+        int amount = 0;
         for (Ship sh : ay.getPlayer().getShips()) {
             if (sh.getLength() == 4) {
                 s = sh;
+                amount++;
             }
         }
         assertEquals(4, s.getLength());
+        assertEquals(1, amount);
     }
     @Test
     public void twoShipsLengthThree() {
@@ -71,14 +77,23 @@ public class AiTest {
         assertEquals(3, s.getLength());
     }
     @Test
-    public void shipLengthTwo() {
+    public void oneShipLengthTwo() {
         Ship s = new Ship(0, 0, 0, 1);
+        int amount = 0;
         for (Ship sh : ay.getPlayer().getShips()) {
             if (sh.getLength() == 2) {
                 s = sh;
+                amount++;
             }
         }
         assertEquals(2, s.getLength());
+        assertEquals(1, amount);
+    }
+    
+    @Test
+    public void shootingWorks() {
+        ay.shoot();
+        assertEquals(1, ay.getPlayer().getShotsFired().size());
     }
 
     // TODO add test methods here.

@@ -1,5 +1,10 @@
 package laivanupotus.player;
 
+/**
+ * Class represents the artificial intelligence
+ * behind the opponents actions.
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,6 +20,10 @@ public class Ai {
         this.player = new Player();  
         generateShips();
     }
+    
+    /**
+     * Method tries to choose the best shooting option.
+     */
     
     public void shoot() {
         Shot lastHit = null;
@@ -34,8 +43,8 @@ public class Ai {
         }
         boolean ampui = false;
         if (lastHit != null) {
-            for (int i = -1; i < 2; i+=2) {
-                Shot a = new Shot(lastHit.getX() + i,lastHit.getY());
+            for (int i = -1; i < 2; i += 2) {
+                Shot a = new Shot(lastHit.getX() + i, lastHit.getY());
                 boolean ammuttu = false;
                 for (Shot sh : player.getShotsFired()) {
                     if (sh.getX() == a.getX() && sh.getY() == a.getY()) {
@@ -48,7 +57,7 @@ public class Ai {
                         break;
                     }
                 }
-                Shot b = new Shot(lastHit.getX(),lastHit.getY() + i);
+                Shot b = new Shot(lastHit.getX(), lastHit.getY() + i);
                 ammuttu = false;
                 for (Shot sh : player.getShotsFired()) {
                     if (sh.getX() == b.getX() && sh.getY() == b.getY()) {
@@ -85,38 +94,20 @@ public class Ai {
     }
     
     private void generateShips() {
-        
+        generateShip(5);
+        generateShip(4);
+        generateShip(3);
+        generateShip(3);
+        generateShip(2);
+    }
+    
+    private void generateShip(int length) {
         while (true) {
-            Ship five = new Ship(5, random.nextInt(15), random.nextInt(15), random.nextInt(4) + 1);
-            if (player.addShip(five)) {
-                break;
-            }
-        }
-        while (true) {
-            Ship four = new Ship(4, random.nextInt(15), random.nextInt(15), random.nextInt(4) + 1);
-            if (player.addShip(four)) {
-                break;
-            }
-        }
-        while (true) {
-            Ship three = new Ship(3, random.nextInt(15), random.nextInt(15), random.nextInt(4) + 1);
-            if (player.addShip(three)) {
-                break;
-            }
-        }
-        while (true) {
-            Ship three2 = new Ship(3, random.nextInt(15), random.nextInt(15), random.nextInt(4) + 1);
-            if (player.addShip(three2)) {
-                break;
-            }
-        }
-        while (true) {
-            Ship two = new Ship(2, random.nextInt(15), random.nextInt(15), random.nextInt(4) + 1);
+            Ship two = new Ship(length, random.nextInt(15), random.nextInt(15), random.nextInt(4) + 1);
             if (player.addShip(two)) {
-                break;
+                return;
             }
         }
-        
     }
     
 }

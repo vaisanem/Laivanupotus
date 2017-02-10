@@ -1,5 +1,9 @@
 package laivanupotus.domain;
 
+/**
+ * Class creates a single shot.
+ */
+
 public class Shot {
     
     private int x;

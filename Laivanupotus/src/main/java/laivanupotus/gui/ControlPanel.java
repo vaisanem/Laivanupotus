@@ -7,6 +7,10 @@ import javax.swing.*;
 import javax.swing.WindowConstants;
 import laivanupotus.game.Game;
 
+/**
+ * Class takes the input from the player.
+ */
+
 public class ControlPanel implements Runnable {
     
     private JFrame frame;

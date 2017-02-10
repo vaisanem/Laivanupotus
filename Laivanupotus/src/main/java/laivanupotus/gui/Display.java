@@ -4,6 +4,10 @@ import java.awt.*;
 import javax.swing.*;
 import laivanupotus.game.Game;
 
+/**
+ * Class presents both of the boards to the player.
+ */
+
 public class Display implements Runnable {
     
     private JFrame frame;

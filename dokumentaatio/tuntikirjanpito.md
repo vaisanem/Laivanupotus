@@ -11,3 +11,6 @@ Päivä | Tunnit | Kuvaus
 03.02.2017 | 2,5h | Testejä ja raportteja
 05.02.2017 | 1h | Koodikatselmointi
 06.02.2017 | 2,5h | Kokoon parsimista, UI
+09.02.2017 | 1,5h | Ampumistoimintoja
+09.02.2017 | 3,5h | UIn hierominen, peli toimii debugatessa
+10.02.2017 | 2h | Testejä ja dokumentointia

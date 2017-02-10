@@ -1,5 +1,9 @@
 package laivanupotus.domain;
 
+/**
+ * Class creates a single particle of a ship.
+ */
+
 public class Particle {
     
     private int x;

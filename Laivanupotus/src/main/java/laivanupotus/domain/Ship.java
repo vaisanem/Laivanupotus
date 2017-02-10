@@ -1,5 +1,9 @@
 package laivanupotus.domain;
 
+/**
+ * Class creates a ship.
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 

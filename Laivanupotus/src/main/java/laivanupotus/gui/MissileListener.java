@@ -5,6 +5,10 @@ import javax.swing.*;
 import laivanupotus.domain.*;
 import laivanupotus.game.*;
 
+/**
+ * Class takes care of the players shooting based on the input.
+ */
+
 public class MissileListener implements ActionListener {
     
     private Game game;

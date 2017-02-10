@@ -7,6 +7,10 @@ import javax.swing.JPanel;
 import laivanupotus.domain.*;
 import laivanupotus.player.*;
 
+/**
+ * Class paints the playing board with ships and shots.
+ */
+
 public class Board extends JPanel {
     
     private Player player;

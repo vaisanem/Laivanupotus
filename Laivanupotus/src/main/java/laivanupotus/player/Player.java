@@ -1,5 +1,9 @@
 package laivanupotus.player;
 
+/**
+ * Class provides the actions that player needs in the game.
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import laivanupotus.domain.*;
@@ -14,6 +18,13 @@ public class Player {
         this.shotsFired = new ArrayList<>();
     }
     
+    /**
+     * Method checks that the shot is within the borders
+     * and if so, adds it.
+     * @param shot Shot chosen by the player.
+     * @return Whether the shot was added.
+     */
+    
     public boolean shoot(Shot shot) {
         if (shot.getX() > 14 || shot.getX() < 0) {
             return false;
@@ -24,6 +35,12 @@ public class Player {
         shotsFired.add(shot);
         return true;
     }
+    
+    /**
+     * Method adds the new ship if it's valid.
+     * @param ship Ship of the players choosing
+     * @return Valid or not
+     */
     
     public boolean addShip(Ship ship) {
         if (!shipsAreInitialized()) {
@@ -77,6 +94,11 @@ public class Player {
         }
         return false;
     }
+    
+    /**
+     * Checks whether all the required 5 ships are in place.
+     * @return True or false
+     */
     
     public boolean shipsAreInitialized() {
         return ships.size() == 5;   

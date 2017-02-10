@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 10,
+      <title>File: 12,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -102,6 +102,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#laivanupotus.gui.ShipListener.java">laivanupotus/gui/ShipListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#laivanupotus.Main.java">laivanupotus/Main.java</a>
                 </td>
                 <td>
@@ -117,6 +131,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#laivanupotus.game.Game.java">laivanupotus/game/Game.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#laivanupotus.gui.MissileListener.java">laivanupotus/gui/MissileListener.java</a>
                 </td>
                 <td>
                   0

@@ -38,6 +38,12 @@ public class PlayerTest {
     }
     
     @Test
+    public void shipsAreInitialized() {
+        addShips();
+        assertTrue(playa.shipsAreInitialized());
+    }
+    
+    @Test
     public void stillInTheGame() {
         assertFalse(playa.hasLost());
     }
@@ -59,6 +65,11 @@ public class PlayerTest {
         assertTrue(playa.addShip(s));
         assertEquals(1, playa.getShips().size());
         assertEquals(s, playa.getShips().get(0));
+    }
+    
+    @Test
+    public void noShots() {
+        assertEquals(0, playa.getShotsFired().size());
     }
     
     @Test
@@ -86,7 +97,7 @@ public class PlayerTest {
     @Test
     public void addShips() {
         Ship s = new Ship(5, 0, 0, 2);
-        Ship sa = new Ship(4, 15, 15, 4);
+        Ship sa = new Ship(4, 14, 14, 4);
         Ship ss = new Ship(3, 10, 10, 3);
         Ship se = new Ship(3, 4, 5, 3);
         Ship sg = new Ship(2, 0, 10, 2);
