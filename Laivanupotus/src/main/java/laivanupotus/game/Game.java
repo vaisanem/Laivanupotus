@@ -16,6 +16,7 @@ public class Game {
     private int turn;
     private Player player;
     private Ai ai;
+    private Ai ai2;
     private Board boardAi;
     private Board boardPlayer;
     private Display disp;
@@ -26,8 +27,10 @@ public class Game {
         turn = 0;
         player = new Player();
         ai = new Ai();
-        this.boardAi = new Board(ai.getPlayer(), player);
+        ai2 = new Ai();
+        this.boardAi = new Board(ai.getPlayer(), ai2.getPlayer());
         this.boardPlayer = new Board(player, ai.getPlayer());
+//        this.boardPlayer = new Board(ai2.getPlayer(), ai.getPlayer());
         disp = new Display(this);
         SwingUtilities.invokeLater(disp);
         cp = new ControlPanel(this);
@@ -37,16 +40,16 @@ public class Game {
     public void letsBegin() {
         
         while (true) {
-//            Ship s = new Ship(5, 0, 0, 1);
-//            Ship sa = new Ship(4, 14, 0, 1);
-//            Ship ss = new Ship(3, 14, 14, 3);
-//            Ship sd = new Ship(3, 0, 14, 3);
-//            Ship sf = new Ship(2, 7, 7, 1);
-//            player.addShip(sf);
-//            player.addShip(sd);
-//            player.addShip(ss);
-//            player.addShip(sa);
-//            player.addShip(s);
+            Ship s = new Ship(5, 0, 0, 1);
+            Ship sa = new Ship(4, 14, 0, 1);
+            Ship ss = new Ship(3, 14, 14, 3);
+            Ship sd = new Ship(3, 0, 14, 3);
+            Ship sf = new Ship(2, 7, 7, 1);
+            player.addShip(sf);
+            player.addShip(sd);
+            player.addShip(ss);
+            player.addShip(sa);
+            player.addShip(s);
             if (player.shipsAreInitialized()) {
                 break;
             }
@@ -63,13 +66,21 @@ public class Game {
             boolean winner;
             
             if (turn % 2 == 0) {
-                playerShoots();
-                boardAi.update();
+//                ai2Shoots();
+//                boardAi.update();
+//                try {
+//                    Thread.sleep(2000);
+//                } catch (Exception e) {
+//                    System.out.println("Errror rror or rrr");
+//                }
+
+//                playerShoots();
+//                boardAi.update();
             } else {
                 aiShoots();
                 boardPlayer.update();
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                 } catch (Exception e) {
                     System.out.println("Errror rror or rrr");
                 }
@@ -105,8 +116,17 @@ public class Game {
         ai.shoot();
         //RETURN SHOT?
         Player aiPlayer = ai.getPlayer();
+//        Player ai2Player = ai2.getPlayer();
         didItHit(aiPlayer, player);
     }
+    
+//    private void ai2Shoots() {
+//        ai2.shoot();
+//        //RETURN SHOT?
+//        Player ai2Player = ai2.getPlayer();
+//        Player aiPlayer = ai.getPlayer();
+//        didItHit(ai2Player, aiPlayer);
+//    }
     
     private void didItHit(Player shooter, Player target) {
         Shot sh = shooter.getShotsFired().get(shooter.getShotsFired().size() - 1);

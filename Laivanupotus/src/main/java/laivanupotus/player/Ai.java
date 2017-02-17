@@ -14,11 +14,14 @@ public class Ai {
     
     private Random random;
     private Player player;
+    private List<Shot> possibleShots;
 
     public Ai() {
         this.random = new Random();
-        this.player = new Player();  
+        this.player = new Player();
+        possibleShots = new ArrayList();
         generateShips();
+        generateAllPossibleShots();
     }
     
     /**
@@ -27,66 +30,152 @@ public class Ai {
     
     public void shoot() {
         Shot lastHit = null;
-        List<Shot> lastFour = new ArrayList();
-        for (int i = 1; i < 5; i++) {
-            int indeksi = player.getShotsFired().size() - i;
-            if (indeksi < 0) {
+        List<Shot> lastFive = new ArrayList();
+        for (int i = 1; i < 6; i++) {
+            int index = player.getShotsFired().size() - i;
+            if (index < 0) {
                 break;
             }
-            lastFour.add(player.getShotsFired().get(indeksi));
+            lastFive.add(player.getShotsFired().get(index));
         }
-        for (Shot sh : lastFour) {
-            if (sh.getHit()) {
-                lastHit = sh;
-                break;
+        if (!onTheSameLine(lastFive)) {
+            for (Shot sh : lastFive) {
+                if (sh.getHit()) {
+                    lastHit = sh;
+                    break;
+                }
             }
-        }
-        boolean ampui = false;
-        if (lastHit != null) {
-            for (int i = -1; i < 2; i += 2) {
-                Shot a = new Shot(lastHit.getX() + i, lastHit.getY());
-                boolean ammuttu = false;
-                for (Shot sh : player.getShotsFired()) {
-                    if (sh.getX() == a.getX() && sh.getY() == a.getY()) {
-                        ammuttu = true;
+            boolean didShoot = false;
+            if (lastHit != null) {
+                for (int i = -1; i < 2; i += 2) {
+                    Shot a = new Shot(lastHit.getX() + i, lastHit.getY());
+                    boolean alreadyShot = false;
+                    for (Shot sh : player.getShotsFired()) {
+                        if (sh.getX() == a.getX() && sh.getY() == a.getY()) {
+                            alreadyShot = true;
+                        }
+                    }
+                    if (!alreadyShot) {
+                        if (player.shoot(a)) {
+                            didShoot = true;
+                            possibleShots.remove(a);
+                            break;
+                        }
+                    }
+                    Shot b = new Shot(lastHit.getX(), lastHit.getY() + i);
+                    alreadyShot = false;
+                    for (Shot sh : player.getShotsFired()) {
+                        if (sh.getX() == b.getX() && sh.getY() == b.getY()) {
+                            alreadyShot = true;
+                        }
+                    }
+                    if (!alreadyShot) {
+                        if (player.shoot(b)) {
+                            didShoot = true;
+                            possibleShots.remove(b);
+                            break;
+                        }
+                    }
+
+                }
+            }
+
+            if (!didShoot) {
+                while (true) {;
+                    Shot shot = possibleShots.get(random.nextInt(possibleShots.size()));
+                    if (!player.getShotsFired().contains(shot)) {
+                        if (player.shoot(shot)) {
+                            possibleShots.remove(shot);
+                            break;
+                        }
                     }
                 }
-                if (!ammuttu) {
-                    if (player.shoot(a)) {
-                        ampui = true;
-                        break;
-                    }
-                }
-                Shot b = new Shot(lastHit.getX(), lastHit.getY() + i);
-                ammuttu = false;
-                for (Shot sh : player.getShotsFired()) {
-                    if (sh.getX() == b.getX() && sh.getY() == b.getY()) {
-                        ammuttu = true;
-                    }
-                }
-                if (!ammuttu) {
-                    if (player.shoot(b)) {
-                        ampui = true;
-                        break;
-                    }
-                }
-                
             }
         }
         
-        if (!ampui) {
-            while (true) {
-                int x = random.nextInt(15);
-                int y = random.nextInt(15);
-                Shot shot = new Shot(x, y);
-                if (!player.getShotsFired().contains(shot)) {
-                    if (player.shoot(shot)) {
-                        break;
+    }
+    
+    private boolean onTheSameLine(List<Shot> lastFive) {
+        int sameX = 0;
+        int sameY = 0;
+        if (lastFive.isEmpty()) {
+            return false;
+        }
+        Shot shot = lastFive.get(0);
+        for (Shot s : lastFive) {
+            if (s.getHit()) {
+                if (shot.getX() - s.getX() == 0) {
+                    int diffY = shot.getY() - s.getY();
+                    if (diffY > -5 && diffY < 5) {
+                        sameX++;
+                    }
+                } else if (shot.getY() - s.getY() == 0) {
+                    int diffX = shot.getX() - s.getX();
+                    if (diffX > -5 && diffX < 5) {
+                        sameY++;
                     }
                 }
             }
         }
+        if (sameX == 5) {
+            takeOutSurroundings(5);
+            return false;
+        } else if (sameY == 5) {
+            takeOutSurroundings(5);
+            return false;
+        } else if (sameX > 1) {
+            return shootInTheSameLine('x', lastFive);
+        } else if (sameY > 1) {
+            return shootInTheSameLine('y', lastFive);
+        } else {
+            return false;
+        }
+    }
+    
+    private boolean shootInTheSameLine(char c, List<Shot> lastFive) {
+        Shot shot = null;
+        int direction = 0;
+        if (lastFive.get(0).getHit()) {
+            shot = lastFive.get(0);
+            direction = 1;
+        } else {
+            for (Shot s : lastFive) {
+                if (s.getHit()) {
+                    shot = s;
+                    direction = -1;
+                }
+            }
+        }
+        if (c == 'x') {
+            Shot shot1 = new Shot(shot.getX(), shot.getY() + direction);
+            if (player.shoot(shot1)) {
+                possibleShots.remove(shot1);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            Shot shot1 = new Shot(shot.getX() +  direction, shot.getY());
+            if (player.shoot(shot1)) {
+                possibleShots.remove(shot1);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    
+    private void takeOutSurroundings(int length) {
         
+    }
+    
+    private void generateAllPossibleShots() {
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                Shot s = new Shot(i, j);
+                possibleShots.add(s);
+            }
+        }
     }
 
     public Player getPlayer() {
