@@ -5,9 +5,9 @@ Yksinpelattava, (kaksinpeliominaisuus?). Kaikki originaalit toiminnot on tarkoit
   
 **Toiminnot:** Laivueen asettaminen pelilaudalle, ohjuksen laukaisu tiettyyn koordinaattiin  
   
-  
+##Luokkakaavio
 ![Luokkkakaavio](/dokumentaatio/Laivanupotusluokkakaavio.png)  
-  
+##Sekvenssikaavio
 ![Sekvenssikaavio](/dokumentaatio/Player-adding-a-ship.png)  
-  
+##Sekvenssikaavio
 ![Sekvenssikaavio](/dokumentaatio/Player-adding-a-shot.png)
