@@ -16,4 +16,4 @@ Päivä | Tunnit | Kuvaus
 10.02.2017 | 2h | Testejä ja dokumentointia
 16.02.2017 | 2h | AIn ampumistoiminnon kehitys
 17.02.2017 | 1h | Toimii suorittaessa pl. pelaajan ampumistoiminto
-17.02.2017 | 2h | Deadline-valmisteluja, koodin siistimistä
+17.02.2017 | 3h | Deadline-valmisteluja, koodin siistimistä
