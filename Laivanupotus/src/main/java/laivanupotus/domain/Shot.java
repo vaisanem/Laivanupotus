@@ -23,10 +23,20 @@ public class Shot {
     public int getY() {
         return y;
     }
+    
+    /**
+     * Checks whether shot has damaged a ship.
+     * @return yes or no
+     */
 
     public boolean getHit() {
         return hit;
     }
+    
+    /**
+     * Shot gets marked whether it has damaged a ship.
+     * @param hit True of false
+     */
 
     public void setHit(boolean hit) {
         this.hit = hit;

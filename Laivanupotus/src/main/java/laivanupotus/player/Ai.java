@@ -5,8 +5,7 @@ package laivanupotus.player;
  * behind the opponents actions.
  */
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.Random;
 import laivanupotus.domain.*;
 
@@ -38,6 +37,7 @@ public class Ai {
             }
             lastFive.add(player.getShotsFired().get(index));
         }
+        //we have gathered last 5 shots
         if (!onTheSameLine(lastFive)) {
             for (Shot sh : lastFive) {
                 if (sh.getHit()) {
@@ -45,6 +45,7 @@ public class Ai {
                     break;
                 }
             }
+            //checked if a ship has been hitted with 1 of 5 last shots
             boolean didShoot = false;
             if (lastHit != null) {
                 for (int i = -1; i < 2; i += 2) {
@@ -76,23 +77,14 @@ public class Ai {
                             break;
                         }
                     }
-
                 }
+                //tries shooting to the surroundings of the lastHit
             }
-
             if (!didShoot) {
-                while (true) {;
-                    Shot shot = possibleShots.get(random.nextInt(possibleShots.size()));
-                    if (!player.getShotsFired().contains(shot)) {
-                        if (player.shoot(shot)) {
-                            possibleShots.remove(shot);
-                            break;
-                        }
-                    }
-                }
+                shootRandomly();
             }
-        }
-        
+            //if no better option, shoots randomly
+        }  
     }
     
     private boolean onTheSameLine(List<Shot> lastFive) {
@@ -117,13 +109,8 @@ public class Ai {
                 }
             }
         }
-        if (sameX == 5) {
-            takeOutSurroundings(5);
-            return false;
-        } else if (sameY == 5) {
-            takeOutSurroundings(5);
-            return false;
-        } else if (sameX > 1) {
+        //checks if there is multiple shots aligned
+        if (sameX > 1) {
             return shootInTheSameLine('x', lastFive);
         } else if (sameY > 1) {
             return shootInTheSameLine('y', lastFive);
@@ -165,8 +152,20 @@ public class Ai {
         }
     }
     
+    private void shootRandomly() {
+        while (true) {
+            Shot shot = possibleShots.get(random.nextInt(possibleShots.size()));
+            if (!player.getShotsFired().contains(shot)) {
+                if (player.shoot(shot)) {
+                    possibleShots.remove(shot);
+                    break;
+                }
+            }
+        }
+    }
+    
     private void takeOutSurroundings(int length) {
-        
+        //to be coming soon
     }
     
     private void generateAllPossibleShots() {
@@ -198,5 +197,4 @@ public class Ai {
             }
         }
     }
-    
 }

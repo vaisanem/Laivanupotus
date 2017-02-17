@@ -19,6 +19,11 @@ public class Ship {
         
     }
     
+    /**
+     * Checks if the ship  has sunken.
+     * @return yes or no
+     */
+    
     public boolean isAfloat() {
         for (Particle p : pieces) {
             if (!p.isDamaged()) {

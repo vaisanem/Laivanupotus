@@ -36,14 +36,13 @@ public class Game {
         SwingUtilities.invokeLater(cp);
     }
     
+    /**
+     * Game loop.
+     */
+    
     public void letsBegin() {
         
         while (true) {
-            try {
-                    Thread.sleep(5000);
-                } catch (Exception e) {
-                    System.out.println("Errror rror or rrr");
-                }
 //            Ship s = new Ship(5, 0, 0, 1);
 //            Ship sa = new Ship(4, 14, 0, 1);
 //            Ship ss = new Ship(3, 14, 14, 3);
@@ -57,37 +56,29 @@ public class Game {
             if (player.shipsAreInitialized()) {
                 break;
             }
+            
+            waitASecondOrTwo();
         }
         boardPlayer.update();
-//        try {
-//            Thread.sleep(3000);
-//        } catch (Exception e) {
-//            System.out.println("Error roor ror orrr rr");
-//        }
         
         while (!end) {
             
             boolean winner;
             
             if (turn % 2 == 0) {
+                playerShoots();
+                boardAi.update();
+                
 //                ai2Shoots();
 //                boardAi.update();
-//                try {
-//                    Thread.sleep(2000);
-//                } catch (Exception e) {
-//                    System.out.println("Errror rror or rrr");
-//                }
 
-//                playerShoots();
-//                boardAi.update();
+                waitASecondOrTwo();
+                
             } else {
                 aiShoots();
                 boardPlayer.update();
-                try {
-                    Thread.sleep(2000);
-                } catch (Exception e) {
-                    System.out.println("Errror rror or rrr");
-                }
+                
+                waitASecondOrTwo();
             }
             
             if (player.hasLost()) {
@@ -111,6 +102,7 @@ public class Game {
             if (shots + 1 == player.getShotsFired().size()) {
                 break;
             }
+            waitASecondOrTwo();
         }
         Player aiPlayer = ai.getPlayer();
         didItHit(player, aiPlayer);
@@ -141,6 +133,14 @@ public class Game {
                     sh.setHit(true);
                 }
             }
+        }
+    }
+    
+    private void waitASecondOrTwo() {
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println("Errror rror or rrr");
         }
     }
 

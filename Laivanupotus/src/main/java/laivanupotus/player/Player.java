@@ -104,6 +104,11 @@ public class Player {
         return ships.size() == 5;   
     }
     
+    /**
+     * Checks if the player has lost the game.
+     * @return true or false
+     */
+    
     public boolean hasLost() {
         if (shipsAreInitialized()) {
             for (Ship s : ships) {

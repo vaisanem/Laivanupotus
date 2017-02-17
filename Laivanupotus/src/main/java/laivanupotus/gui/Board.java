@@ -50,6 +50,10 @@ public class Board extends JPanel {
         
     }
     
+    /**
+     * Updates the board.
+     */
+    
     public void update() {
         repaint();
     }

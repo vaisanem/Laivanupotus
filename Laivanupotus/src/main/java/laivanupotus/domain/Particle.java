@@ -24,9 +24,18 @@ public class Particle {
         return y;
     }
     
+    /**
+     * Particle gets hit.
+     */
+    
     public void getShot() {
         damaged = true;
     }
+    
+    /**
+     * Checks if the particle has been hit.
+     * @return yes or no
+     */
 
     public boolean isDamaged() {
         return damaged;
