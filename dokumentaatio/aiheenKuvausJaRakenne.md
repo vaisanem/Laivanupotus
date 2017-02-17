@@ -7,5 +7,7 @@ Yksinpelattava, (kaksinpeliominaisuus?). Kaikki originaalit toiminnot on tarkoit
   
   
 ![Luokkkakaavio](/dokumentaatio/Laivanupotusluokkakaavio.png)  
+  
 ![Sekvenssikaavio](/dokumentaatio/Player-adding-a-ship.png)  
+  
 ![Sekvenssikaavio](/dokumentaatio/Player-adding-a-shot.png)
