@@ -14,3 +14,6 @@ Päivä | Tunnit | Kuvaus
 09.02.2017 | 1,5h | Ampumistoimintoja
 09.02.2017 | 3,5h | UIn hierominen, peli toimii debugatessa
 10.02.2017 | 2h | Testejä ja dokumentointia
+16.02.2017 | 2h | AIn ampumistoiminnon kehitys
+17.02.2017 | 1h | Toimii suorittaessa pl. pelaajan ampumistoiminto
+17.02.2017 | 2h | Deadline-valmisteluja, koodin siistimistä
