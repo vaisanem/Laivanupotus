@@ -9,6 +9,12 @@ public class Shot {
     private int x;
     private int y;
     private boolean hit;
+    
+    /**
+     * Creates a shot, has not damaged a ship by default.
+     * @param x coordinate
+     * @param y coordinate
+     */
 
     public Shot(int x, int y) {
         this.x = x;

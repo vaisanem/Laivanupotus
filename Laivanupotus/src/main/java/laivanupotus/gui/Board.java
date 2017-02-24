@@ -15,6 +15,12 @@ public class Board extends JPanel {
     
     private Player player;
     private Player opponent;
+    
+    /**
+     * Creates a board.
+     * @param player Player whose ships are being painted
+     * @param opponent Player whose shots are being painted
+     */
 
     public Board(Player player, Player opponent) {
         this.player = player;

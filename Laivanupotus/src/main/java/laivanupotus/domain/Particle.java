@@ -9,6 +9,12 @@ public class Particle {
     private int x;
     private int y;
     private boolean damaged;
+    
+    /**
+     * Creates a particle, not damaged by default.
+     * @param x coordinate
+     * @param y coordinate
+     */
 
     public Particle(int x, int y) {
         this.x = x;

@@ -21,6 +21,10 @@ public class Game {
     private Board boardPlayer;
     private Display disp;
     private ControlPanel cp;
+    
+    /**
+     * Game gets created with all of its components.
+     */
 
     public Game() {
         end = false;

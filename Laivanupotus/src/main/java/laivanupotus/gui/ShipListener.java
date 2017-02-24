@@ -16,6 +16,14 @@ public class ShipListener implements ActionListener {
     private JButton jenson;
     private JTextField text;
     private JLabel message;
+    
+    /**
+     * Gets created.
+     * @param game game
+     * @param jenson JButton for submitting
+     * @param text JTextField to enter the details
+     * @param message JLabel to communicate to the player
+     */
 
     public ShipListener(Game game, JButton jenson, JTextField text, JLabel message) {
         this.game = game;

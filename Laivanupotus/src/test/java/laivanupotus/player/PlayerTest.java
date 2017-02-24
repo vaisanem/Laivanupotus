@@ -46,6 +46,8 @@ public class PlayerTest {
     @Test
     public void stillInTheGame() {
         assertFalse(playa.hasLost());
+        addShips();
+        assertFalse(playa.hasLost());
     }
     
     @Test
@@ -73,6 +75,13 @@ public class PlayerTest {
     }
     
     @Test
+    public void invalidShotNotAdded() {
+        Shot shot = new Shot(-1, 15);
+        playa.shoot(shot);
+        assertEquals(0, playa.getShotsFired().size());
+    }
+    
+    @Test
     public void shotGetsAdded() {
         Shot shot = new Shot(0, 0);
         playa.shoot(shot);
@@ -81,9 +90,17 @@ public class PlayerTest {
     
     @Test
     public void wontAddShipWithSameParticle() {
-        Ship s = new Ship(4, 1, 1, 3);
+        Ship s = new Ship(4, 1, 1, 1);
         playa.addShip(s);
         assertFalse(playa.addShip(s));
+    }
+    
+    @Test
+    public void wontAddShipRightNextTo() {
+        Ship s = new Ship(4, 1, 1, 1);
+        Ship sh = new Ship(3, 2, 1, 1);
+        playa.addShip(s);
+        assertFalse(playa.addShip(sh));
     }
     
     @Test

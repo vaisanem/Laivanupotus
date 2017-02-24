@@ -1,22 +1,29 @@
 package laivanupotus.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class creates a ship.
  */
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Ship {
     
     private List<Particle> pieces;
     private int length;
+    
+    /**
+     * Creates a ship.
+     * @param length Amount of particles in a ship
+     * @param x Coordinate of the first particle
+     * @param y Coordinate of the first particle
+     * @param direction Integer value of the direction of the other particles
+     */
 
     public Ship(int length, int x, int y, int direction) {
         this.length = length;
         pieces = new ArrayList<>();
         addParticles(x, y, direction);
-        
     }
     
     /**

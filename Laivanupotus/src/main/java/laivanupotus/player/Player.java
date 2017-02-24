@@ -12,6 +12,10 @@ public class Player {
     
     private List<Ship> ships;
     private List<Shot> shotsFired;
+    
+    /**
+     * Very nice.
+     */
 
     public Player() {
         this.ships = new ArrayList<>();
@@ -44,20 +48,12 @@ public class Player {
     
     public boolean addShip(Ship ship) {
         if (!shipsAreInitialized()) {
+            if (!withinBoundaries(ship)) {
+                return false;
+            }
             for (Particle p : ship.getPieces()) {
-                if (p.getX() > 14 || p.getY() > 14) {
+                if (sameParticle(p)) {
                     return false;
-                }
-                if (p.getX() < 0 || p.getY() < 0) {
-                    return false;
-                }
-                for (Ship s : getShips()) {
-                    for (Particle pa : s.getPieces()) {
-                        if (p.getX() == pa.getX() && p.getY() == pa.getY()) {
-                            return false;
-                        }
-                        
-                    }
                 }
             }
             if (shipNextToAnother(ship)) {
@@ -90,6 +86,29 @@ public class Player {
                         return true;
                     }
                 }
+            }
+        }
+        return false;
+    }
+    
+    private boolean withinBoundaries(Ship ship) {
+        for (Particle p : ship.getPieces()) {
+            if (p.getX() < 0 || p.getX() > 14) {
+                return false;
+            }
+            if (p.getY() < 0 || p.getY() > 14) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private boolean sameParticle(Particle p) {
+        for (Ship s : getShips()) {
+            for (Particle pa : s.getPieces()) {
+                if (p.equals(pa)) {
+                    return false;
+                }       
             }
         }
         return false;

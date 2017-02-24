@@ -14,6 +14,10 @@ public class Ai {
     private Random random;
     private Player player;
     private List<Shot> possibleShots;
+    
+    /**
+     * AI is born, ships and shooting options are generated.
+     */
 
     public Ai() {
         this.random = new Random();

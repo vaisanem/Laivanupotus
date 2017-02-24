@@ -6,6 +6,11 @@ import laivanupotus.gui.*;
 
 public class Main {
     
+    /**
+     * Game gets created and started.
+     * @param args argh
+     */
+    
     public static void main(String[] args) {
         Game game = new Game();
 //        ControlPanel cp = new ControlPanel(game);
