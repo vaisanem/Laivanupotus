@@ -59,8 +59,10 @@ public class Player {
             if (shipNextToAnother(ship)) {
                 return false;
             }
-            ships.add(ship);
-            return true;
+            if (correctLength(ship)) {
+                ships.add(ship);
+                return true;
+            }
         }
         return false;
     }
@@ -69,20 +71,20 @@ public class Player {
         for (Particle p : s.getPieces()) {
             for (Ship sh : ships) {
                 for (Particle pa : sh.getPieces()) {
-                    int erotus = 0;
-                    int ero = 0;
-                    ero += p.getX() - pa.getX();
-                    if (ero < 0) {
-                        ero *= -1;
+                    int totalDiff = 0;
+                    int diff = 0;
+                    diff += p.getX() - pa.getX();
+                    if (diff < 0) {
+                        diff *= -1;
                     }
-                    erotus += ero;
-                    ero = 0;
-                    ero += p.getY() - pa.getY();
-                    if (ero < 0) {
-                        ero *= -1;
+                    totalDiff += diff;
+                    diff = 0;
+                    diff += p.getY() - pa.getY();
+                    if (diff < 0) {
+                        diff *= -1;
                     }
-                    erotus += ero;
-                    if (erotus > -2 && erotus < 2) {
+                    totalDiff += diff;
+                    if (totalDiff > -2 && totalDiff < 2) {
                         return true;
                     }
                 }
@@ -109,6 +111,26 @@ public class Player {
                 if (p.equals(pa)) {
                     return false;
                 }       
+            }
+        }
+        return false;
+    }
+    
+    private boolean correctLength(Ship ship) {
+        int length = ship.getLength();
+        int same = 0;
+        if (length > 1 && length < 6) {
+            for (Ship s : ships) {
+                if (length == s.getLength()) {
+                    same++;
+                }
+            }
+            if (length == 3) {
+                if (same < 2) {
+                    return true;
+                }
+            } else if (same == 0) {
+                return true;
             }
         }
         return false;

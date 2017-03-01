@@ -53,7 +53,11 @@ public class ShipListener implements ActionListener {
         Ship sh = new Ship(ship[0], ship[1], ship[2], ship[3]);
         if (!game.getPlayer().addShip(sh)) {
             message.setText("There was a problem adding your ship");
-//            timer.setDelay(3000);
+            try {
+                Thread.sleep(2000);
+            } catch (Exception ex) {
+                System.out.println("Errorrororr");
+            }
             message.setText("Details in order (int): length, x, y, direction");
         }
     }

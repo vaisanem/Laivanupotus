@@ -12,9 +12,11 @@ public class Display implements Runnable {
     
     private JFrame frame;
     private Game game;
+    private JLabel info;
 
     public Display(Game game) {
         this.game = game;
+        this.info = new JLabel("Onnea peliin!");
     }
 
     @Override
@@ -35,20 +37,24 @@ public class Display implements Runnable {
     public void createComponents(Container container) {
         container.setLayout(new GridLayout(1, 3));
         container.add(game.getBoardAi());
-        container.add(luoPaneeli());
+        container.add(info);
         container.add(game.getBoardPlayer());
     }
     
-    public JPanel luoPaneeli() {
-        JPanel paneeli = new JPanel();
-        paneeli.setLayout(new GridLayout(2, 1));
-        JTextField text = new JTextField();
-        JButton butt = new JButton("Enter");
-        JLabel message = new JLabel();
-        butt.addActionListener(new ShipListener(game, butt, text, message));
-        paneeli.add(text);
-        paneeli.add(butt);
-        return paneeli;
+    public void setInfo(String text) {
+        info.setText(text);
     }
+    
+//    public JPanel luoPaneeli() {
+//        JPanel paneeli = new JPanel();
+//        paneeli.setLayout(new GridLayout(2, 1));
+//        JTextField text = new JTextField();
+//        JButton butt = new JButton("Enter");
+//        JLabel message = new JLabel();
+//        butt.addActionListener(new ShipListener(game, butt, text, message));
+//        paneeli.add(text);
+//        paneeli.add(butt);
+//        return paneeli;
+//    }
     
 }

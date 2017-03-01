@@ -33,122 +33,110 @@ public class Ai {
     
     public void shoot() {
         Shot lastHit = null;
-        List<Shot> lastFive = new ArrayList();
-        for (int i = 1; i < 6; i++) {
+        List<Shot> lastTen = new ArrayList();
+        for (int i = 1; i < 11; i++) {
             int index = player.getShotsFired().size() - i;
             if (index < 0) {
                 break;
             }
-            lastFive.add(player.getShotsFired().get(index));
+            lastTen.add(player.getShotsFired().get(index));
         }
         //we have gathered last 5 shots
-        if (!onTheSameLine(lastFive)) {
-            for (Shot sh : lastFive) {
-                if (sh.getHit()) {
-                    lastHit = sh;
-                    break;
+        for (Shot sh : lastTen) {
+            if (sh.getHit()) {
+                lastHit = sh;
+                break;
+            }
+        }
+        //checked if a ship has been hitted with 1 of 5 last shots
+        if (lastHit != null) {
+            if (!onTheSameLine(lastTen)) {
+                boolean didShoot = shootToSurroundings(lastHit);
+                if (!didShoot) {
+                    shootRandomly();
                 }
             }
-            //checked if a ship has been hitted with 1 of 5 last shots
-            boolean didShoot = false;
-            if (lastHit != null) {
-                for (int i = -1; i < 2; i += 2) {
-                    Shot a = new Shot(lastHit.getX() + i, lastHit.getY());
-                    boolean alreadyShot = false;
-                    for (Shot sh : player.getShotsFired()) {
-                        if (sh.getX() == a.getX() && sh.getY() == a.getY()) {
-                            alreadyShot = true;
-                        }
-                    }
-                    if (!alreadyShot) {
-                        if (player.shoot(a)) {
-                            didShoot = true;
-                            possibleShots.remove(a);
-                            break;
-                        }
-                    }
-                    Shot b = new Shot(lastHit.getX(), lastHit.getY() + i);
-                    alreadyShot = false;
-                    for (Shot sh : player.getShotsFired()) {
-                        if (sh.getX() == b.getX() && sh.getY() == b.getY()) {
-                            alreadyShot = true;
-                        }
-                    }
-                    if (!alreadyShot) {
-                        if (player.shoot(b)) {
-                            didShoot = true;
-                            possibleShots.remove(b);
-                            break;
-                        }
-                    }
-                }
-                //tries shooting to the surroundings of the lastHit
-            }
-            if (!didShoot) {
-                shootRandomly();
-            }
-            //if no better option, shoots randomly
-        }  
+        } else {
+            shootRandomly();
+        }
     }
     
-    private boolean onTheSameLine(List<Shot> lastFive) {
+    private boolean onTheSameLine(List<Shot> lastTen) {
+        List<Shot> same = new ArrayList();
         int sameX = 0;
         int sameY = 0;
-        if (lastFive.isEmpty()) {
+        if (lastTen.isEmpty()) {
             return false;
         }
-        Shot shot = lastFive.get(0);
-        for (Shot s : lastFive) {
+        Shot shot = null;
+        for (Shot s : lastTen) {
             if (s.getHit()) {
+                shot = s;
+                same.add(shot);
+                break;
+            }
+        }
+        for (Shot s : lastTen) {
+            if (!shot.equals(s) && s.getHit()) {
                 if (shot.getX() - s.getX() == 0) {
                     int diffY = shot.getY() - s.getY();
                     if (diffY > -5 && diffY < 5) {
                         sameX++;
+                        same.add(s);
                     }
-                } else if (shot.getY() - s.getY() == 0) {
+                }    
+                if (shot.getY() - s.getY() == 0) {
                     int diffX = shot.getX() - s.getX();
                     if (diffX > -5 && diffX < 5) {
                         sameY++;
+                        same.add(s);
                     }
                 }
             }
         }
         //checks if there is multiple shots aligned
-        if (sameX > 1) {
-            return shootInTheSameLine('x', lastFive);
-        } else if (sameY > 1) {
-            return shootInTheSameLine('y', lastFive);
+        if (sameX > 0) {
+            takeOutSurroundings('x', same);
+            return shootInTheSameLine('x', lastTen);
+        } else if (sameY > 0) {
+            takeOutSurroundings('y', same);
+            return shootInTheSameLine('y', lastTen);
         } else {
             return false;
         }
     }
     
-    private boolean shootInTheSameLine(char c, List<Shot> lastFive) {
+    private boolean shootInTheSameLine(char c, List<Shot> lastTen) {
         Shot shot = null;
-        int direction = 0;
-        if (lastFive.get(0).getHit()) {
-            shot = lastFive.get(0);
-            direction = 1;
+        if (lastTen.get(0).getHit()) {
+            shot = lastTen.get(0);
         } else {
-            for (Shot s : lastFive) {
+            for (Shot s : lastTen) {
                 if (s.getHit()) {
                     shot = s;
-                    direction = -1;
                 }
             }
         }
         if (c == 'x') {
-            Shot shot1 = new Shot(shot.getX(), shot.getY() + direction);
-            if (player.shoot(shot1)) {
+            Shot shot1 = new Shot(shot.getX(), shot.getY() + 1);
+            Shot shot2 = new Shot(shot.getX(), shot.getY() - 1);
+            if (possibleShots.contains(shot1) && player.shoot(shot1)) {
                 possibleShots.remove(shot1);
+                return true;
+            } else if (possibleShots.contains(shot2) && player.shoot(shot2)) {
+                possibleShots.remove(shot2);
                 return true;
             } else {
                 return false;
             }
         } else {
-            Shot shot1 = new Shot(shot.getX() +  direction, shot.getY());
-            if (player.shoot(shot1)) {
+            Shot shot1 = new Shot(shot.getX() + 1, shot.getY());
+            Shot shot2 = new Shot(shot.getX() - 1, shot.getY());
+            if (possibleShots.contains(shot1) && player.shoot(shot1)) {
                 possibleShots.remove(shot1);
+                return true;
+            } else if (possibleShots.contains(shot2) && player.shoot(shot2)) {
+                possibleShots.remove(shot2);
                 return true;
             } else {
                 return false;
@@ -156,10 +144,33 @@ public class Ai {
         }
     }
     
+    private boolean shootToSurroundings(Shot lastHit) {
+        if (lastHit != null) {
+            for (int i = -1; i < 2; i += 2) {
+                Shot a = new Shot(lastHit.getX() + i, lastHit.getY());
+                if (possibleShots.contains(a)) {
+                    if (player.shoot(a)) {
+                        possibleShots.remove(a);
+                        return true;
+                    }
+                }
+                Shot b = new Shot(lastHit.getX(), lastHit.getY() + i);
+                if (possibleShots.contains(b)) {
+                    if (player.shoot(b)) {
+                        possibleShots.remove(b);
+                        return true;
+                    }
+                }
+            }
+            //tries shooting to the surroundings of the lastHit
+        }
+        return false;
+    }
+    
     private void shootRandomly() {
         while (true) {
             Shot shot = possibleShots.get(random.nextInt(possibleShots.size()));
-            if (!player.getShotsFired().contains(shot)) {
+            if (possibleShots.contains(shot)) {
                 if (player.shoot(shot)) {
                     possibleShots.remove(shot);
                     break;
@@ -168,8 +179,22 @@ public class Ai {
         }
     }
     
-    private void takeOutSurroundings(int length) {
-        //to be coming soon
+    private void takeOutSurroundings(char c, List<Shot> same) {
+        if (same.size() > 2) {
+            for (Shot s : same) {
+                if (c == 'x') {
+                    Shot sh = new Shot(s.getX() + 1, s.getY());
+                    Shot sho = new Shot(s.getX() - 1, s.getY());
+                    possibleShots.remove(sh);
+                    possibleShots.remove(sho);
+                } else if (c == 'y') {
+                    Shot sh = new Shot(s.getX(), s.getY() + 1);
+                    Shot sho = new Shot(s.getX(), s.getY() - 1);
+                    possibleShots.remove(sh);
+                    possibleShots.remove(sho);
+                }
+            }
+        }
     }
     
     private void generateAllPossibleShots() {
