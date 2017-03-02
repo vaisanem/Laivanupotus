@@ -84,7 +84,8 @@ public class Game {
                 waitASecondOrTwo();
             }
             
-            if (player.hasLost()) {
+            if (ai2.getPlayer().hasLost()) {
+//            if (player.hasLost()) {
                 winner = false;
                 end = true;
             } else if (ai.getPlayer().hasLost()) {
@@ -144,7 +145,7 @@ public class Game {
     
     private void waitASecondOrTwo() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1250);
         } catch (Exception e) {
             System.out.println("Errror rror or rrr");
         }

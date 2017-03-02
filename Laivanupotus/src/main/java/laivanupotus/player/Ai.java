@@ -41,7 +41,7 @@ public class Ai {
             }
             lastTen.add(player.getShotsFired().get(index));
         }
-        //we have gathered last 5 shots
+        //we have gathered last 10 shots
         for (Shot sh : lastTen) {
             if (sh.getHit()) {
                 lastHit = sh;
