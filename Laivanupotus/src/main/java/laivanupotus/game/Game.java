@@ -70,11 +70,11 @@ public class Game {
         while (!end) {
             
             if (turn % 2 == 0) {
-                disp.setInfo("On vuorosi.");
+                disp.setInfo("Your turn.");
 //                playerShoots();
                 ai2Shoots();
                 boardAi.update();
-                disp.setInfo("Odota...");
+                disp.setInfo("Wait...");
                 waitASecondOrTwo();
                 
             } else {
@@ -95,11 +95,11 @@ public class Game {
             turn++;
 
         }
-        String text = "Voitit";
+        String text = "won";
         if (!winner) {
-            text = "Hävisit";
+            text = "lost";
         }
-        disp.setInfo(text + " pelin!");
+        disp.setInfo("You " + text + " the game!");
         
     }
     
