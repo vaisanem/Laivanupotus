@@ -19,3 +19,4 @@ Päivä | Tunnit | Kuvaus
 17.02.2017 | 3h | Deadline-valmisteluja, koodin siistimistä
 23.02.2017 | 2h | Koodin siistimistä ja muuta hienosäätöä
 24.02.2017 | 2h | Deadline-valmisteluja
+05.03.2017 | 3h | Testejä ja virhetilanteita
