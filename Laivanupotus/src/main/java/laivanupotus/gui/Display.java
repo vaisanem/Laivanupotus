@@ -16,7 +16,7 @@ public class Display implements Runnable {
 
     public Display(Game game) {
         this.game = game;
-        this.info = new JLabel("Onnea peliin!");
+        this.info = new JLabel("Place your ships.");
     }
 
     @Override
@@ -37,8 +37,16 @@ public class Display implements Runnable {
     public void createComponents(Container container) {
         container.setLayout(new GridLayout(1, 3));
         container.add(game.getBoardAi());
-        container.add(info);
+        Container con = new Container();
+        con.setLayout(new GridLayout(6, 1));
+        info.setHorizontalAlignment(JLabel.CENTER);
+        con.add(info);
+        container.add(con);
         container.add(game.getBoardPlayer());
+    }
+    
+    public void update() {
+        createComponents(frame);
     }
     
     public void setInfo(String text) {

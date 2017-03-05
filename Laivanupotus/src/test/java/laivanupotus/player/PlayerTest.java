@@ -63,7 +63,7 @@ public class PlayerTest {
     
     @Test
     public void shipGetsAdded() {
-        Ship s = new Ship(4, 1, 1, 1);
+        Ship s = new Ship(4, 1, 1, 3);
         assertTrue(playa.addShip(s));
         assertEquals(1, playa.getShips().size());
         assertEquals(s, playa.getShips().get(0));
@@ -76,31 +76,63 @@ public class PlayerTest {
     
     @Test
     public void invalidShotNotAdded() {
-        Shot shot = new Shot(-1, 15);
-        playa.shoot(shot);
+        Shot shot = new Shot(-1, -1);
+        assertFalse(playa.shoot(shot));
+        shot = new Shot(-1, 15);
+        assertFalse(playa.shoot(shot));
+        shot = new Shot(15, -1);
+        assertFalse(playa.shoot(shot));
+        shot = new Shot(15, 15);
+        assertFalse(playa.shoot(shot));
+        shot = new Shot(0, 15);
+        assertFalse(playa.shoot(shot));
         assertEquals(0, playa.getShotsFired().size());
     }
     
     @Test
-    public void shotGetsAdded() {
+    public void shotsGetAdded() {
         Shot shot = new Shot(0, 0);
+        Shot s = new Shot(0, 14);
+        Shot sh = new Shot(14, 0);
+        Shot sho = new Shot(14, 14);
         playa.shoot(shot);
-        assertEquals(1, playa.getShotsFired().size());
+        playa.shoot(sho);
+        playa.shoot(s);
+        playa.shoot(sh);
+        assertEquals(4, playa.getShotsFired().size());
+    }
+    
+    @Test
+    public void wontAddIfShipWithWrongLength() {
+        Ship ship = new Ship(1, 2, 2, 2);
+        Ship ship2 = new Ship(6, 2, 2, 2);
+        playa.addShip(ship);
+        playa.addShip(ship2);
+        assertEquals(0, playa.getShips().size());
     }
     
     @Test
     public void wontAddShipWithSameParticle() {
-        Ship s = new Ship(4, 1, 1, 1);
+        Ship s = new Ship(4, 1, 1, 3);
+        Ship sa = new Ship(3, 1, 1, 2);
         playa.addShip(s);
-        assertFalse(playa.addShip(s));
+        assertFalse(playa.addShip(sa));
+        assertEquals(1, playa.getShips().size());
     }
     
     @Test
     public void wontAddShipRightNextTo() {
-        Ship s = new Ship(4, 1, 1, 1);
-        Ship sh = new Ship(3, 2, 1, 1);
+        Ship s = new Ship(4, 1, 1, 3);
+        Ship sh = new Ship(3, 2, 1, 3);
+        Ship shi = new Ship(2, 1, 5, 3);
+        Ship ship = new Ship(5, 0, 0, 2);
+        Ship ships = new Ship(5, 0, 0, 3);
         playa.addShip(s);
         assertFalse(playa.addShip(sh));
+        assertFalse(playa.addShip(shi));
+        assertFalse(playa.addShip(ship));
+        assertFalse(playa.addShip(ships));
+        assertEquals(1, playa.getShips().size());
     }
     
     @Test
@@ -109,6 +141,27 @@ public class PlayerTest {
         Ship sh = new Ship(2, 10, 0, 2);
         playa.addShip(sh);
         assertEquals(5, playa.getShips().size());
+    }
+    
+    @Test
+    public void quantityLimitsWork() {
+        Ship s = new Ship(5, 0, 0, 2);
+        Ship ss = new Ship(5, 10, 10, 4);
+        playa.addShip(s);
+        playa.addShip(ss);
+        assertEquals(1, playa.getShips().size());
+        Ship a = new Ship(4, 14, 14, 4);
+        Ship aa = new Ship(4, 10, 10, 4);
+        playa.addShip(a);
+        playa.addShip(aa);
+        assertEquals(2, playa.getShips().size());
+        Ship k = new Ship(3, 10, 10, 3);
+        Ship v = new Ship(3, 4, 5, 3);
+        Ship kv = new Ship(3, 14, 0, 1);
+        playa.addShip(k);
+        playa.addShip(v);
+        playa.addShip(kv);
+        assertEquals(4, playa.getShips().size());
     }
     
     @Test

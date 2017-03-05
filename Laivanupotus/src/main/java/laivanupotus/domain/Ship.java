@@ -21,9 +21,9 @@ public class Ship {
      */
 
     public Ship(int length, int x, int y, int direction) {
-        this.length = length;
         pieces = new ArrayList<>();
-        addParticles(x, y, direction);
+        addParticles(length, x, y, direction);
+        this.length = pieces.size();
     }
     
     /**
@@ -40,21 +40,21 @@ public class Ship {
         return false;
     }
     
-    private void addParticles(int x, int y, int direction) {
+    private void addParticles(int length, int x, int y, int direction) {
         
         Particle p = new Particle(x, y);
         pieces.add(p);
 
         for (int i = 1; i < length; i++) {
             if (direction == 1) {
-                p = new Particle(x, y + i);
+                p = new Particle(x, y - i);
                 pieces.add(p);
             } else if (direction == 2) {
                 p = new Particle(x + i, y);
                 pieces.add(p);
             }
             if (direction == 3) {
-                p = new Particle(x, y - i);
+                p = new Particle(x, y + i);
                 pieces.add(p);
             } else if (direction == 4) {
                 p = new Particle(x - i, y);

@@ -106,6 +106,31 @@ public class AiTest {
         assertEquals(2, ay.getPlayer().getShotsFired().size());
         assertEquals(s, ay.getPlayer().getShotsFired().get(1));
     }
+    
+    @Test
+    public void shootsToSurroundingsAgain() {
+        Shot shot = new Shot(0, 0);
+        Shot s = new Shot(1, 0);
+        shot.setHit(true);
+        ay.getPlayer().shoot(shot);
+        ay.shoot();
+        assertEquals(2, ay.getPlayer().getShotsFired().size());
+        assertEquals(s, ay.getPlayer().getShotsFired().get(1));
+    }
+    
+    @Test
+    public void shootsInTheSameLine() {
+        ay.shoot();
+        Shot first = ay.getPlayer().getShotsFired().get(0);
+        first.setHit(true);
+        ay.shoot();
+        Shot second = ay.getPlayer().getShotsFired().get(1);
+        second.setHit(true);
+        ay.shoot();
+        Shot third = ay.getPlayer().getShotsFired().get(2);
+        assertEquals(first.getY(), second.getY(), third.getY());
+    }
+    
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

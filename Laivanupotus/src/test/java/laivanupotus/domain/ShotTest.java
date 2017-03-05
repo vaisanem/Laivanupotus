@@ -47,6 +47,27 @@ public class ShotTest {
         shot.setHit(true);
         assertTrue(shot.getHit());
     }
+    
+    @Test
+    public void notEqual() {
+        Particle p = new Particle(0, 0);
+        Shot s = new Shot(0, 0);
+        Shot sh = new Shot(1, 0);
+        Shot sho = new Shot(0, 1);
+        assertFalse(s.equals(p));
+        assertFalse(s.equals(sh));
+        assertFalse(s.equals(sho));
+        assertFalse(s.equals(null));
+    }
+    
+    @Test
+    public void equals() {
+        Shot p = new Shot(0, 0);
+        Shot s = new Shot(0, 0);
+        assertTrue(p.equals(s));
+        s = p;
+        assertTrue(p.equals(s));
+    }
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

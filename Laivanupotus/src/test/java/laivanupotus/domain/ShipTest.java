@@ -37,6 +37,16 @@ public class ShipTest {
     }
     
     @Test
+    public void correctParticles() {
+        Particle p = new Particle(2, 2);
+        Particle pa = new Particle(2, 3);
+        Particle par = new Particle(2, 4);
+        assertEquals(p, ship.getPieces().get(0));
+        assertEquals(pa, ship.getPieces().get(1));
+        assertEquals(par, ship.getPieces().get(2));
+    }
+    
+    @Test
     public void isAfloat() {
         assertTrue(ship.isAfloat());
     }

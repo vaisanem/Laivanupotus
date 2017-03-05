@@ -35,9 +35,11 @@ public class ShipListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean correct = true;
         String[] details = text.getText().split(", ");
         if (details.length != 4) {
             message.setText("Details not correct");
+            correct = false;
         }
         int[] ship = new int[4];
         
@@ -47,18 +49,19 @@ public class ShipListener implements ActionListener {
                 ship[i] = number;
             }
         } catch (Exception ex) {
+            correct = false;
             message.setText("Details not correct");
         }
         
-        Ship sh = new Ship(ship[0], ship[1], ship[2], ship[3]);
-        if (!game.getPlayer().addShip(sh)) {
-            message.setText("There was a problem adding your ship");
-            try {
-                Thread.sleep(2000);
-            } catch (Exception ex) {
-                System.out.println("Errorrororr");
+        if (correct) {
+            Ship sh = new Ship(ship[0], ship[1], ship[2], ship[3]);
+            if (!game.getPlayer().addShip(sh)) {
+                message.setText("There was a problem adding your ship");
+            } else {
+                message.setText("");
             }
-            message.setText("Details in order (int): length, x, y, direction");
         }
+        
     }
+    
 }

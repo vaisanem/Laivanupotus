@@ -1,15 +1,15 @@
 **Aihe:** Toteutus perinteisestä laivanupotus-pelistä. 
-Yksinpelattava, (kaksinpeliominaisuus?). Kaikki originaalit toiminnot on tarkoitus toteuttaa vähintään. Kaksijakoinen näkymä, missä toisessa oman laivueen tilanne, ja toisessa näkymä jo ammutuista sijainneista ja osumista.  
+Yksinpelattava. Kaikki originaalit toiminnot on tarkoitus toteuttaa vähintään, poislukien vuoro vaihtuu aina riippumatta osuuko pelaaja ammuksellaan. Laivan uppoamisesta ei myöskään saa ilmoitusta. Kaksijakoinen näkymä, missä oikealla on oman laivueen tilanne, ja vasemmalla näkymä jo ammutuista sijainneista ja osumista.  
   
 **Käyttäjät:** Pelaaja  
   
 **Toiminnot:** Laivueen asettaminen pelilaudalle, ohjuksen laukaisu tiettyyn koordinaattiin  
 
 ##Rakennekuvaus
-Kukin laiva on 2-5 mittayksikköä pitkä, partikkeli on yhden mittayksikön kokoinen. Pelaajalla on täsmälleen 5 laivaa, lisäksi satunnainen määrä ammuttuja laukauksia, kuitenkin aluksi 0. Toteutetussa peliversiossa on yksi pelaaja ja yksi AI. ControlPanelin avulla toteutetaan pelitoiminnot, Display esittää ne pelaajalle.  
+Kukin laiva on 2-5 mittayksikköä pitkä, partikkeli on yhden mittayksikön kokoinen. Pelaajalla on täsmälleen 5 laivaa, lisäksi ammuttuja laukauksia jokaiselta pelikierrokselta, kuitenkin aluksi 0. Toteutetussa peliversiossa on yksi pelaaja ja yksi AI, jotka ovat Game-luokan oliomuuttujina. ControlPanelin avulla toteutetaan pelitoiminnot, Display esittää ne pelaajalle, Game-luokan nekin.  
 ##Luokkakaavio
 ![Luokkakaavio](/dokumentaatio/Laivanupotusluokkakaavio.png)  
 ##Sekvenssikaavio
-![Sekvenssikaavio](/dokumentaatio/Player-adding-a-ship.png)  
+![Sekvenssikaavio, laivan lisäys](/dokumentaatio/Player-adding-a-ship.png)  
 ##Sekvenssikaavio
-![Sekvenssikaavio](/dokumentaatio/Player-adding-a-shot.png)
+![Sekvenssikaavio, ohjuksen lisäys](/dokumentaatio/Player-adding-a-shot.png)

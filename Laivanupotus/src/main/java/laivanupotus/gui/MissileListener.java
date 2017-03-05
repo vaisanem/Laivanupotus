@@ -34,27 +34,33 @@ public class MissileListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean correct = true;
         String[] details = text.getText().split(", ");
         if (details.length != 2) {
             message.setText("Details not correct");
+            correct = false;
         }
         int[] missile = new int[2];
-        
         try {
             for (int i = 0; i < details.length; i++) {
                 int number = Integer.parseInt(details[i]);
                 missile[i] = number;
             }
         } catch (Exception ex) {
+            correct = false;
             message.setText("Details not correct");
         }
         
-        Shot sh = new Shot(missile[0], missile[1]);
-        if (!game.getPlayer().shoot(sh)) {
-            message.setText("There was a problem shooting your missile");
-//            timer.setDelay(3000);
-            message.setText("Details in order (int):x, y");
+        if (correct) {
+            Shot sh = new Shot(missile[0], missile[1]);
+            if (!game.getPlayer().shoot(sh)) {
+                message.setText("There was a problem shooting your missile");
+            } else {
+                message.setText("");
+            }
         }
+        
     }
+    
 }
 
